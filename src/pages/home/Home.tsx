@@ -40,7 +40,7 @@ const Home = () => {
     <div>
       {/* first */}
       <div className="mb-10">
-        <div className="grid grid-cols-7 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-7 gap-2 md:gap-4">
           <div className="col-span-4">
             <img
               className="w-full rounded"
@@ -49,7 +49,7 @@ const Home = () => {
             />
           </div>
           <div className="col-span-3">
-            <div className="h-100 flex items-center">
+            <div className="h-auto md:h-100 flex items-center">
               <div className="grid grid-cols-1 gap-4 my-auto text-left">
                 <h1 className="text-3xl font-bold">
                   Welcome to{" "}
@@ -74,7 +74,7 @@ const Home = () => {
 
       {/* news */}
       <h1 className="text-4xl font-bold text-left mb-3">Newest articles</h1>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[...Array(6)].map((_, index) => (
           <div key={index} className="...">
             <CardCustom />
