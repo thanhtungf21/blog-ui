@@ -2,6 +2,7 @@ import clsx from "clsx";
 import styles from "./navbar.module.css";
 import NavbarMenu from "./navbar-menu/NavbarMenu";
 import { Link } from "react-router-dom";
+import NavbarDrawer from "./navbar-drawer/NavbarDrawer";
 
 const Navbar = () => {
   return (
@@ -15,8 +16,11 @@ const Navbar = () => {
               alt="logo"
             />
           </Link>
-          <div>
+          <div className="hidden md:block">
             <NavbarMenu />
+          </div>
+          <div className="block md:hidden">
+            <NavbarDrawer />
           </div>
         </div>
       </div>
