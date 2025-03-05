@@ -6,7 +6,7 @@ const DefaultLayout = () => {
   return (
     <>
       <Navbar />
-      <div className="app-body">
+      <div className="app-body text-left">
         <RouteManager />
       </div>
       <Footer />

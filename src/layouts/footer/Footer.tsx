@@ -3,7 +3,7 @@ import styles from "./footer.module.css";
 
 const Footer = () => {
   return (
-    <div className={clsx(styles.footer, "mt-5")}>
+    <div className={clsx(styles.footer)}>
       Copyright © 2025 Tran Trung Nguyen. All Rights Reserved.
     </div>
   );
