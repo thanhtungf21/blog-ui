@@ -81,7 +81,11 @@ const About = () => {
         ))}
       </div>
       <h1 className="text-4xl font-bold mb-3">Our teams</h1>
-      <div></div>
+      <div>
+        {teams.map(() => (
+          <></>
+        ))}
+      </div>
     </div>
   );
 };
