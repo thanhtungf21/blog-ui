@@ -1,16 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 import DefaultRoutes from "./default/DefaultRoutes";
 import { RouteConfig } from "@/interfaces/routeConfig";
-import LandingPageLayout from "../landing-page-layout/LandingPageLayout";
+import LandingPageRoutes from "./landing-page/LandingPageRoutes";
 
 const RouteManager = () => {
   return (
     <Routes>
       {DefaultRoutes.map((item: RouteConfig) => (
-        <Route path={item.path} element={item.element} />
+        <Route key={item.path} path={item.path} element={item.element} />
       ))}
-      {LandingPageLayout.map((item: RouteConfig) => (
-        <Route path={item.path} element={item.element} />
+      {LandingPageRoutes.map((item: RouteConfig) => (
+        <Route key={item.path} path={item.path} element={item.element} />
       ))}
     </Routes>
   );

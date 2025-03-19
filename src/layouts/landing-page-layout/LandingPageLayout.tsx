@@ -1,5 +1,13 @@
-import { RouteConfig } from "@/interfaces/routeConfig";
+import RouteManager from "../routes/RouteManager";
 
-const LandingPageLayout: RouteConfig[] = [];
+const LandingPageLayout = () => {
+  return (
+    <>
+      <div className="app-landing-page-body">
+        <RouteManager />
+      </div>
+    </>
+  );
+};
 
 export default LandingPageLayout;
