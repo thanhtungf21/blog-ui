@@ -5,7 +5,6 @@ import facebook_icon from "/icon/facebook_icon.svg";
 import youtube_icon from "/icon/youtube_icon.svg";
 import github_icon from "/icon/github_icon.svg";
 import tiktok_icon from "/icon/tiktok_icon.svg";
-import { useEffect, useRef } from "react";
 
 const Profile = () => {
   const socialsLink = [
@@ -36,28 +35,6 @@ const Profile = () => {
     },
   ];
 
-  const iframeRef: React.RefObject<null> = useRef(null);
-
-  useEffect(() => {
-    // const iframe: any = iframeRef.current;
-    // if (iframe) {
-    //   iframe.onload = () => {
-    //     try {
-    //       iframe.contentWindow.postMessage("play", "*");
-    //     } catch (error) {
-    //       console.error("Autoplay failed:", error);
-    //     }
-    //   };
-    // }
-
-    window.addEventListener("message", (event) => {
-      const audio: any = document.getElementById("iframeAudio");
-      if (audio && event.data === "play") {
-        audio.play();
-      }
-    });
-  }, []);
-
   return (
     <div className={clsx("")}>
       <video
@@ -69,13 +46,13 @@ const Profile = () => {
       >
         <source src="/music-background/goku2.mp4" type="video/mp4" />
       </video>
-      <iframe
+      {/* <iframe
         ref={iframeRef}
         src="/music-background/laviai.mp3"
         allow="autoplay"
         className="d-none"
         id="iframeAudio"
-      ></iframe>
+      ></iframe> */}
       <div
         className={clsx(
           "max-w-sm rounded-lg overflow-hidden bg-black-500 shadow-lg shadow-black-500/50 p-8",
