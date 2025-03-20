@@ -1,0 +1,9 @@
+.error_page {
+    background-color: #202127;
+    color: aliceblue;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

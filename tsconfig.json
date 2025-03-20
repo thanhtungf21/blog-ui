@@ -9,9 +9,16 @@
     }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "baseUrl": "./",
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
   }
 }

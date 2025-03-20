@@ -5,11 +5,15 @@ import facebook_icon from "/icon/facebook_icon.svg";
 import youtube_icon from "/icon/youtube_icon.svg";
 import github_icon from "/icon/github_icon.svg";
 import tiktok_icon from "/icon/tiktok_icon.svg";
+import { useRef, useState } from "react";
 
 const Profile = () => {
+  const [isStart, setIsStart] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLVideoElement>(null);
   const socialsLink = [
     {
-      link: "https://www.youtube.com/",
+      link: "https://youtube.com/playlist?list=PLxw8W4bsccNMoLFBByPqWtkSJn7b3wsD4&si=a90plwwkRM33EbF7",
       image: youtube_icon,
       text: "",
     },
@@ -35,17 +39,37 @@ const Profile = () => {
     },
   ];
 
+  const handlePlay = () => {
+    if (videoRef.current && audioRef.current) {
+      videoRef.current?.play();
+      audioRef.current?.play();
+    }
+  };
+
   return (
     <div className={clsx("")}>
+      <div
+        className={clsx(styles.hidden_background, isStart ? styles.hidden : "")}
+        onClick={() => {
+          handlePlay();
+          setIsStart(true);
+        }}
+      >
+        Click to hide...
+      </div>
       <video
-        autoPlay
+        ref={videoRef}
+        // autoPlay
         muted
+        playsInline
         loop
         // src={""}
         className={clsx(styles.video_background)}
       >
-        <source src="/music-background/goku2.mp4" type="video/mp4" />
+        Your browser does not support the audio element.
+        <source src="/music-background/koi_video.mp4" type="video/mp4" />
       </video>
+      <audio src="/music-background/laviai.mp3" ref={audioRef} loop></audio>
       {/* <iframe
         ref={iframeRef}
         src="/music-background/laviai.mp3"
@@ -53,12 +77,7 @@ const Profile = () => {
         className="d-none"
         id="iframeAudio"
       ></iframe> */}
-      <div
-        className={clsx(
-          "max-w-sm rounded-lg overflow-hidden bg-black-500 shadow-lg shadow-black-500/50 p-8",
-          styles.center_card
-        )}
-      >
+      <div className={clsx("rounded-lg grid", styles.center_card)}>
         <div className="flex justify-center items-center">
           <div className={styles.avatar_frame}>
             <img
@@ -73,11 +92,11 @@ const Profile = () => {
             />
           </div>
         </div>
-        <div className={clsx(styles.typewriter, "mt-10")}>
-          <h1 className={clsx(styles.cursor, styles.typewriter_animation)}>
-            Hello world ! Welcome to {location.hostname}
-          </h1>
-        </div>
+        {/* <div className={clsx(styles.typewriter, "my-10")}>
+            <h1 className={clsx(styles.cursor, styles.typewriter_animation)}>
+              Hello world ! Welcome to {location.hostname}
+            </h1>
+          </div> */}
         <div className="mt-6 flex justify-center items-center gap-3">
           {socialsLink.map((social, index) => (
             <a
