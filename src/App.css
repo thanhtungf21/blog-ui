@@ -11,6 +11,7 @@
 
 .app-landing-page-body {
   min-height: 100vh;
+  position: relative;
 }
 
 @media (max-width: 480px) {}

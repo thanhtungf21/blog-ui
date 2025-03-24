@@ -4,7 +4,7 @@ import styles from "./error.module.css";
 const Error = () => {
   return (
     <div className={clsx(styles.error_page)}>
-      <div className="font-extrabold">hello</div>
+      <div className="font-extrabold">Error</div>
     </div>
   );
 };

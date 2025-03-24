@@ -5,12 +5,14 @@ import facebook_icon from "/icon/facebook_icon.svg";
 import youtube_icon from "/icon/youtube_icon.svg";
 import github_icon from "/icon/github_icon.svg";
 import tiktok_icon from "/icon/tiktok_icon.svg";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { UserContext } from "@/context/UserContext";
 
 const Profile = () => {
   const [isStart, setIsStart] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLVideoElement>(null);
+  const { user } = useContext(UserContext);
   const socialsLink = [
     {
       link: "https://youtube.com/playlist?list=PLxw8W4bsccNMoLFBByPqWtkSJn7b3wsD4&si=a90plwwkRM33EbF7",
@@ -43,6 +45,7 @@ const Profile = () => {
     if (videoRef.current && audioRef.current) {
       videoRef.current?.play();
       audioRef.current?.play();
+      console.log({ user });
     }
   };
 

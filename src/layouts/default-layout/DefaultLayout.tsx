@@ -1,6 +1,6 @@
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
-import RouteManager from "../routes/RouteManager";
+import RouteManager from "../../routes/RouteManager";
 
 const DefaultLayout = () => {
   return (
