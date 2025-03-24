@@ -55,7 +55,7 @@ const Profile = () => {
           setIsStart(true);
         }}
       >
-        Click to hide...
+        Click to enter...
       </div>
       <video
         ref={videoRef}
