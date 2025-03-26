@@ -14,4 +14,7 @@ export default defineConfig({
     host: true,
     allowedHosts: [".ngrok-free.app"],
   },
+  build: {
+    sourcemap: false, // Disable source maps in production
+  },
 });
