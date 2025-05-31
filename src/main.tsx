@@ -17,18 +17,22 @@ import LandingPageRoutes from "./routes/landing-page/LandingPageRoutes.tsx"; // 
 
 const router = createBrowserRouter([
   {
+    path: "/*", // Changed: Apply splat to the root route for App
     element: <App />, // App component làm wrapper chung, chứa UserProvider và Outlet
     errorElement: <Error />, // Trang lỗi chung cho các lỗi không bắt được trong route
     children: [
       {
+        // path: "/app", // Ví dụ nếu DefaultLayout dành cho các path bắt đầu bằng /app
         element: <DefaultLayout />,
         children: DefaultRoutes, // Các route con sử dụng DefaultLayout
       },
       {
+        // path: "/", // LandingPageLayout có thể xử lý path gốc và các con của nó
         element: <LandingPageLayout />,
         children: LandingPageRoutes, // Các route con sử dụng LandingPageLayout
       },
       {
+        // Route này nên được đặt SAU các route layout cụ thể hơn
         path: "*", // Bắt tất cả các path không khớp với các route đã định nghĩa (404)
         element: <Error />,
       },

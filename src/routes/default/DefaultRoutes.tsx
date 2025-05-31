@@ -12,7 +12,8 @@ const DefaultRoutes: RouteConfig[] = [
   //   element: <Suspense fallback={<RouteLoadingFallback />}><Profile /></Suspense>,
   // },
   {
-    path: "/about-us",
+    // path: "/about-us",
+    path: "about-us", // Changed: Relative path
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <About />
@@ -20,7 +21,8 @@ const DefaultRoutes: RouteConfig[] = [
     ),
   },
   {
-    path: "/dev",
+    // path: "/dev",
+    path: "dev", // Changed: Relative path
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <Dev />

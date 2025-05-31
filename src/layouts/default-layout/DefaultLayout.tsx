@@ -1,13 +1,13 @@
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
-import RouteManager from "../../routes/RouteManager";
+import { Outlet } from "react-router-dom";
 
 const DefaultLayout = () => {
   return (
     <>
       <Navbar />
       <div className="app-body text-left">
-        <RouteManager />
+        <Outlet />
       </div>
       <Footer />
     </>

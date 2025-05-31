@@ -69,7 +69,7 @@ const Profile = () => {
         audioRef.current.volume = volume;
         audioRef.current.muted = isMuted; // Áp dụng trạng thái mute ban đầu
       }
-      console.log({ user });
+      // console.log({ user });
     }
   }, [user, volume, isMuted]);
 

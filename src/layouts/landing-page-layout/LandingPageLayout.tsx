@@ -1,10 +1,10 @@
-import RouteManager from "../../routes/RouteManager";
+import { Outlet } from "react-router-dom";
 
 const LandingPageLayout = () => {
   return (
     <>
       <div className="app-landing-page-body">
-        <RouteManager />
+        <Outlet /> {/* Render các route con được định nghĩa trong main.tsx */}
       </div>
     </>
   );

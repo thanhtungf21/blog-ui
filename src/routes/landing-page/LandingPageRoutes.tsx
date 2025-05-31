@@ -8,7 +8,8 @@ const Login = lazy(() => import("@/pages/login/Login"));
 
 const LandingPageRoutes: RouteConfig[] = [
   {
-    path: "/profiles",
+    // path: "/profiles",
+    path: "profiles", // Changed: Relative path
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <Profile />
@@ -16,7 +17,8 @@ const LandingPageRoutes: RouteConfig[] = [
     ),
   },
   {
-    path: "/",
+    // path: "/",
+    index: true, // Changed: Use index: true for the root of this layout
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <Profile />
@@ -24,7 +26,8 @@ const LandingPageRoutes: RouteConfig[] = [
     ),
   },
   {
-    path: "/login",
+    // path: "/login",
+    path: "login", // Changed: Relative path
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <Login />
