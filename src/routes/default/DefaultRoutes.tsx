@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { RouteConfig } from "@/interfaces/routeConfig";
 import RouteLoadingFallback from "@/components/router/RouteLoadingFallback"; // Import component dùng chung
 

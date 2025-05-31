@@ -2,10 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
-import svgr from "vite-plugin-svgr"; // Import svgr
 
 export default defineConfig({
-  plugins: [tailwindcss(), react(), svgr()], // Add svgr to the plugins array
+  plugins: [tailwindcss(), react()], // Add svgr to the plugins array
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
