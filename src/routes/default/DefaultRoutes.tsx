@@ -1,23 +1,31 @@
+import React, { Suspense, lazy } from "react";
 import { RouteConfig } from "@/interfaces/routeConfig";
-import About from "@/pages/about-us/About";
-import Dev from "@/pages/dev/Dev";
+import RouteLoadingFallback from "@/components/router/RouteLoadingFallback"; // Import component dùng chung
 
-// import Home from "@/pages/home/Home";
-// import Profile from "@/pages/profile/Profile";
+// Sử dụng React.lazy để tải component khi cần thiết
+const About = lazy(() => import("@/pages/about-us/About"));
+const Dev = lazy(() => import("@/pages/dev/Dev"));
 
 const DefaultRoutes: RouteConfig[] = [
   // {
   //   path: "/",
-  //   element: <Profile />,
-  //   // element: <Home />,
+  //   element: <Suspense fallback={<RouteLoadingFallback />}><Profile /></Suspense>,
   // },
   {
     path: "/about-us",
-    element: <About />,
+    element: (
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <About />
+      </Suspense>
+    ),
   },
   {
     path: "/dev",
-    element: <Dev />,
+    element: (
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Dev />
+      </Suspense>
+    ),
   },
 ];
 

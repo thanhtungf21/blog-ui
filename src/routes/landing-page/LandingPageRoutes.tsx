@@ -1,19 +1,35 @@
+import { Suspense, lazy } from "react";
 import { RouteConfig } from "@/interfaces/routeConfig";
-import Login from "@/pages/login/Login";
-import Profile from "@/pages/profile/Profile";
+import RouteLoadingFallback from "@/components/router/RouteLoadingFallback";
+
+// Sử dụng React.lazy để tải component khi cần thiết
+const Profile = lazy(() => import("@/pages/profile/Profile"));
+const Login = lazy(() => import("@/pages/login/Login"));
 
 const LandingPageRoutes: RouteConfig[] = [
   {
     path: "/profiles",
-    element: <Profile />,
+    element: (
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Profile />
+      </Suspense>
+    ),
   },
   {
     path: "/",
-    element: <Profile />,
+    element: (
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Profile />
+      </Suspense>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Login />
+      </Suspense>
+    ),
   },
 ];
 
