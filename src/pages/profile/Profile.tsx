@@ -106,13 +106,15 @@ const Profile = () => {
         <link
           rel="preload"
           href={"/music-background/koi_video.mp4"}
-          as="video"
+          as="fetch"
+          // as="video"
           type="video/mp4"
         />
         <link
           rel="preload"
           href={"/music-background/laviai.mp3"}
-          as="audio"
+          as="fetch"
+          // as="audio"
           type="audio/mpeg"
         />
       </Helmet>
