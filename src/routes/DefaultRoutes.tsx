@@ -4,7 +4,8 @@ import RouteLoadingFallback from "@/components/router/RouteLoadingFallback"; // 
 
 // Sử dụng React.lazy để tải component khi cần thiết
 const About = lazy(() => import("@/pages/about-us/About"));
-const Dev = lazy(() => import("@/pages/dev/Dev"));
+const Dashboard = lazy(() => import("@/pages/dashboard/Dashboard"));
+// import Dashboard from "@/pages/dashboard/Dashboard";
 
 const DefaultRoutes: RouteConfig[] = [
   // {
@@ -21,11 +22,11 @@ const DefaultRoutes: RouteConfig[] = [
     ),
   },
   {
-    // path: "/dev",
-    path: "dev", // Changed: Relative path
+    // path: "/about-us",
+    path: "dashboard", // Changed: Relative path
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
-        <Dev />
+        <Dashboard />
       </Suspense>
     ),
   },

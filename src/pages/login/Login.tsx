@@ -1,76 +1,118 @@
-import { useContext, useState } from "react";
-import styles from "./login.module.css";
-import clsx from "clsx";
-import { UserContext } from "@/context/UserContext";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { Card, Input, Button, Typography, Form } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import toast from "react-hot-toast";
 
-interface loginFormTypes {
-  email: string;
-  password: string;
-}
+import { authService } from "@/services/authService";
+import { handleApiError } from "@/utils/errorHandler";
+import { IFormInput } from "@/types/auth";
+import { useQueryClient } from "@tanstack/react-query";
+
+const { Title } = Typography;
 
 const Login = () => {
-  const { setUser } = useContext(UserContext);
-  const [loginForm, setLoginForm] = useState<loginFormTypes>({
-    email: "",
-    password: "",
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  // const { setUser } = useContext(UserContext)!;
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<IFormInput>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
-  const navigate = useNavigate();
-
-  const handleUser = async (event: any) => {
-    event.preventDefault();
-    if (!loginForm.email.length || !loginForm.password.length) {
-      toast("Please enter email/password", {
-        type: "error",
-      });
-      return;
-    }
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      setUser(loginForm);
-      toast("Login so easy!");
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
+      // Gọi hàm login từ service
+
+      const responseData = await authService.login(data);
+
+      if (responseData && responseData.data) {
+        queryClient.invalidateQueries({ queryKey: ["me"] });
+        toast.success(responseData?.message || "Đăng nhập thành công!");
+        navigate("/dashboard");
+      } else {
+        // Trường hợp server trả về 200 nhưng không có dữ liệu user mong muốn
+        toast.error(
+          responseData.message || "Phản hồi không hợp lệ từ máy chủ."
+        );
+      }
     } catch (error) {
-      console.log({ error });
+      // ---> SỬA LỖI Ở ĐÂY <---
+      // Chỉ cần gọi hàm xử lý lỗi chung
+      handleApiError(
+        error,
+        "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin."
+      );
     }
   };
 
   return (
-    <div
-      className={clsx(styles.login_pages, "flex align-center justify-center")}
-    >
-      <ToastContainer />
-      <div className={clsx(styles.login_form)}>
-        <h2 className={clsx("text-center text-3xl font-bold mb-6")}>
-          Welcome, please enter to login !
-        </h2>
-        <form onSubmit={handleUser}>
-          <div className="mb-3">
-            <input
-              type="text"
-              placeholder="Enter email"
-              className="input w-full"
-              onChange={(e) =>
-                setLoginForm((prev) => ({ ...prev, email: e.target.value }))
-              }
+    <div className="flex items-center justify-center min-h-[calc(100vh-250px)] bg-gray-100">
+      <Card className="w-full max-w-md shadow-lg">
+        <Title level={2} className="text-center">
+          Login
+        </Title>
+        <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
+          {/* ... Các Form.Item không thay đổi ... */}
+          <Form.Item
+            label="Email"
+            validateStatus={errors.email ? "error" : ""}
+            help={errors.email?.message}
+            required
+          >
+            <Controller
+              name="email"
+              control={control}
+              rules={{ required: "Email is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  prefix={<UserOutlined />}
+                  placeholder="Email"
+                />
+              )}
             />
-          </div>
-          <div className="mb-3">
-            <input
-              type="password"
-              placeholder="Enter password"
-              className="input w-full"
-              onChange={(e) =>
-                setLoginForm((prev) => ({ ...prev, password: e.target.value }))
-              }
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            validateStatus={errors.password ? "error" : ""}
+            help={errors.password?.message}
+            required
+          >
+            <Controller
+              name="password"
+              control={control}
+              rules={{ required: "Password is required" }}
+              render={({ field }) => (
+                <Input.Password
+                  {...field}
+                  prefix={<LockOutlined />}
+                  placeholder="Password"
+                />
+              )}
             />
-          </div>
-          <button className="btn w-full">LOGIN</button>
-        </form>
-      </div>
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="w-full"
+              loading={isSubmitting}
+            >
+              {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 };

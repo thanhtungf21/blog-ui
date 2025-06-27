@@ -3,6 +3,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import "antd/dist/reset.css"; // Import CSS của Ant Design
 
 // Layouts
 import DefaultLayout from "./layouts/default-layout/DefaultLayout.tsx";
@@ -12,8 +13,8 @@ import LandingPageLayout from "./layouts/landing-page-layout/LandingPageLayout.t
 import Error from "./pages/error/Error.tsx";
 
 // Route configurations
-import DefaultRoutes from "./routes/default/DefaultRoutes.tsx";
-import LandingPageRoutes from "./routes/landing-page/LandingPageRoutes.tsx"; // Kiểm tra và sửa nếu cần
+import DefaultRoutes from "./routes/DefaultRoutes.tsx";
+import LandingPageRoutes from "./routes/LandingPageRoutes.tsx"; // Kiểm tra và sửa nếu cần
 
 const router = createBrowserRouter([
   {
