@@ -100,11 +100,7 @@ const Dashboard = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Spin size="large" tip="Loading links..." />
-      </div>
-    );
+    return <Spin size="large" tip="Loading links..." />;
   }
 
   if (isError) {

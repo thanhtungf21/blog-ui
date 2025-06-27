@@ -19,18 +19,7 @@ const AppContent = () => {
   const { isLoading } = useAuth();
 
   if (isLoading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <Spin size="large" tip="Authenticating..." />
-      </div>
-    );
+    return <Spin size="large" tip="Authenticating..." />;
   }
 
   // Khi đã xác thực xong, hiển thị nội dung ứng dụng
