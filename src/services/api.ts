@@ -38,7 +38,9 @@ api.interceptors.response.use(
       // Cách tốt nhất là reload và để routing xử lý.
       // console.log({ error });
 
-      window.location.href = "/login";
+      console.log({ error, "": "go-to-login" });
+
+      // window.location.href = "/login";
     }
 
     // Trả về một Promise bị reject với lỗi để .catch() ở nơi gọi API có thể xử lý

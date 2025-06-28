@@ -100,7 +100,7 @@ const Dashboard = () => {
   });
 
   if (isLoading) {
-    return <Spin size="large" tip="Loading links..." />;
+    return <Spin size="large" tip="Loading links..." fullscreen />;
   }
 
   if (isError) {

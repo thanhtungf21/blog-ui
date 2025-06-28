@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { useContext, useRef, useState, useCallback } from "react";
-import { UserContext } from "@/context/UserContext";
+import { useRef, useState, useCallback } from "react";
+import { useAuth } from "@/context/UserContext";
 import { Helmet } from "react-helmet-async";
 import {
   FaVolumeUp,
@@ -59,7 +59,7 @@ const Profile = () => {
   const [isVolumeHovered, setIsVolumeHovered] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
   const handlePlay = useCallback(() => {
     if (videoRef.current && audioRef.current) {
       videoRef.current?.play();
@@ -163,14 +163,14 @@ const Profile = () => {
               <img
                 src="/logo/penguin_avatar.png"
                 className="w-[100px] h-[100px] rounded-full" // Tailwind classes for avatar_content
-                alt=""
+                alt="avatar"
               />
               <img
                 src="/logo/angry_1.gif"
                 className={clsx(
                   "w-[100px] h-[100px] z-10 absolute left-0 top-0"
                 )} // Tailwind classes for avatar_decor
-                alt=""
+                alt="border-gif"
               />
             </div>
           </div>

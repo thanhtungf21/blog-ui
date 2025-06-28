@@ -15,29 +15,35 @@ import Error from "./pages/error/Error.tsx";
 // Route configurations
 import DefaultRoutes from "./routes/DefaultRoutes.tsx";
 import LandingPageRoutes from "./routes/LandingPageRoutes.tsx"; // Kiểm tra và sửa nếu cần
+import AuthGuard from "./components/AuthGuard/AuthGuard.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/*", // Changed: Apply splat to the root route for App
-    element: <App />, // App component làm wrapper chung, chứa UserProvider và Outlet
-    errorElement: <Error />, // Trang lỗi chung cho các lỗi không bắt được trong route
+    path: "/",
+    element: <App />,
+    errorElement: <Error />,
     children: [
+      // Nhóm route CẦN XÁC THỰC
       {
-        // path: "/app", // Ví dụ nếu DefaultLayout dành cho các path bắt đầu bằng /app
-        element: <DefaultLayout />,
-        children: DefaultRoutes, // Các route con sử dụng DefaultLayout
+        element: <AuthGuard />, // <-- 2. Bọc bằng AuthGuard
+        children: [
+          {
+            element: <DefaultLayout />,
+            children: DefaultRoutes,
+          },
+        ],
       },
+      // Nhóm route CÔNG KHAI
       {
-        // path: "/", // LandingPageLayout có thể xử lý path gốc và các con của nó
         element: <LandingPageLayout />,
-        children: LandingPageRoutes, // Các route con sử dụng LandingPageLayout
-      },
-      {
-        // Route này nên được đặt SAU các route layout cụ thể hơn
-        path: "*", // Bắt tất cả các path không khớp với các route đã định nghĩa (404)
-        element: <Error />,
+        children: LandingPageRoutes,
       },
     ],
+  },
+  {
+    // Để route 404 ở ngoài để bắt tất cả các trường hợp không khớp
+    path: "*",
+    element: <Error />,
   },
 ]);
 
