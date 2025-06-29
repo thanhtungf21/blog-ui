@@ -4,6 +4,7 @@ import {
   HomeOutlined,
   UserOutlined,
   InfoCircleOutlined,
+  LinkOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 
@@ -12,6 +13,11 @@ const items = [
     label: <Link to="/">Home</Link>,
     key: "/",
     icon: <HomeOutlined />,
+  },
+  {
+    label: <Link to="/shortlink">Short Link</Link>,
+    key: "/shortlink",
+    icon: <LinkOutlined />,
   },
   {
     label: <Link to="/profiles">Profile</Link>,

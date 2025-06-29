@@ -1,4 +1,6 @@
+import { history } from "@/utils/history";
 import axios from "axios";
+import toast from "react-hot-toast";
 const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
 // Tạo một instance của axios
@@ -25,20 +27,8 @@ api.interceptors.response.use(
     // console.log({ window: window.location, error });
     if (status === 401 && window.location.pathname !== "/login") {
       // Xử lý lỗi 401 (Unauthorized - Token không hợp lệ hoặc hết hạn)
-      console.error("Unauthorized request. Redirecting to login.");
-
-      // Xóa thông tin user trong context (nếu có)
-      // userContext.setUser(null);
-
-      // Xóa token (nếu bạn vẫn dùng localStorage cho mục đích khác)
-      // localStorage.removeItem('authToken');
-
-      // Chuyển hướng người dùng về trang đăng nhập
-      // Chúng ta không dùng useNavigate ở đây vì đây là một module riêng biệt.
-      // Cách tốt nhất là reload và để routing xử lý.
-      // console.log({ error });
-
-      console.log({ error, "": "go-to-login" });
+      history.push("/login"); // Hoặc bất kỳ route đăng nhập nào của bạn
+      toast.error("Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại");
 
       // window.location.href = "/login";
     }

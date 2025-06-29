@@ -42,11 +42,11 @@ export const UserProvider = ({ children }: any) => {
   const logout = async () => {
     try {
       await authService.logout();
-      toast.success("Logged out successfully!");
+      toast.success("Đã đăng xuất thành công");
 
       // Xóa cache của query 'me' để đảm bảo trạng thái được reset hoàn toàn
       queryClient.setQueryData(["me"], null);
-
+      queryClient.clear();
       navigate("/login");
     } catch (error) {
       handleApiError(error, "Logout failed. Please try again.");

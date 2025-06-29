@@ -10,6 +10,11 @@ export interface ILink {
   updatedAt: string;
 }
 
+export interface IShortenLink {
+  originalUrl: string;
+  customCode?: string;
+}
+
 /**
  * Service quản lý các API liên quan đến links.
  */
@@ -25,6 +30,14 @@ export const linkService = {
       // Nếu dữ liệu nằm trong một thuộc tính khác, ví dụ response.data.links, hãy điều chỉnh lại
 
       return Array.isArray(response.data.data.data) ? response.data.data : [];
+    } catch (error) {
+      throw error;
+    }
+  },
+  shortenLink: async (data: IShortenLink) => {
+    try {
+      const response = await api.post("/links/shorten", data);
+      return response.data;
     } catch (error) {
       throw error;
     }
