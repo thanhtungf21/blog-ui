@@ -42,4 +42,12 @@ export const linkService = {
       throw error;
     }
   },
+  getOriginalUrl: async (shortCode: string) => {
+    try {
+      const response = await api.get(`/slink/${shortCode}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
