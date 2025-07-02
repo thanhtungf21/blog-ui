@@ -1,6 +1,15 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { Card, Input, Button, Typography, Form, Avatar, Flex } from "antd";
+import {
+  Card,
+  Input,
+  Button,
+  Typography,
+  Form,
+  Avatar,
+  Flex,
+  Spin,
+} from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 
@@ -9,12 +18,16 @@ import { handleApiError } from "@/utils/errorHandler";
 import { IFormInput } from "@/types/auth";
 import { useQueryClient } from "@tanstack/react-query";
 import logo from "@/assets/imgs/logo/logo.png";
+import { useAuth } from "@/context/UserContext";
+import { useEffect } from "react";
 
 const { Title } = Typography;
 
 const Login = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { user, isLoading, isSuccess } = useAuth(); // Lấy trạng thái từ context
+
   // const { setUser } = useContext(UserContext)!;
 
   const {
@@ -27,6 +40,15 @@ const Login = () => {
       password: "",
     },
   });
+
+  // Sử dụng useEffect để kiểm tra và chuyển hướng
+  useEffect(() => {
+    // Nếu query "me" thành công và có dữ liệu user
+    if (isSuccess && user) {
+      toast.success("Bạn đã đăng nhập.");
+      navigate("/dashboard", { replace: true }); // Chuyển hướng đến dashboard
+    }
+  }, [isSuccess, user, navigate]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
@@ -53,6 +75,15 @@ const Login = () => {
       );
     }
   };
+
+  if (isLoading) {
+    return <Spin tip="Đang kiểm tra xác thực..." size="large" fullscreen />;
+  }
+
+  // Nếu đã xác thực thành công, không render gì cả vì useEffect sẽ chuyển hướng
+  if (user) {
+    return null;
+  }
 
   return (
     <div className="flex items-center justify-center h-[100vh] bg-gray-100">

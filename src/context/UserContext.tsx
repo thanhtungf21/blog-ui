@@ -6,13 +6,14 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useAuthGuard } from "./AuthGuardContext";
+// import { useAuthGuard } from "./AuthGuardContext";
 
 // Create the context
 interface IUserContext {
   user: User | null; // Sử dụng User type từ src/types/auth.ts
   logout: () => Promise<void>;
   isLoading: boolean;
+  isSuccess: boolean;
 }
 
 export const UserContext = createContext<IUserContext | undefined>(undefined);
@@ -22,16 +23,17 @@ export const UserProvider = ({ children }: any) => {
   // Bắt đầu với trạng thái loading
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { isAuthRequired } = useAuthGuard();
+  // const { isAuthRequired } = useAuthGuard();
 
   const {
     data: userData,
     isLoading,
+    isSuccess,
     // isError,
   } = useQuery({
     queryKey: ["me"], // Key định danh cho query này
     queryFn: authService.getMe, // Hàm gọi API
-    enabled: isAuthRequired,
+    // enabled: isAuthRequired,
     retry: false, // Không tự động thử lại nếu API /me thất bại (thường là do chưa đăng nhập)
     refetchOnWindowFocus: false, // Tùy chọn: tránh gọi lại API mỗi khi focus vào cửa sổ
   });
@@ -57,7 +59,7 @@ export const UserProvider = ({ children }: any) => {
   };
 
   // Value object to pass through the context
-  const value = { user, logout, isLoading };
+  const value = { user, logout, isLoading, isSuccess };
 
   // Provide the context value to child components
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

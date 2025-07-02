@@ -71,6 +71,7 @@ const columns: TableProps<ILink>["columns"] = [
     sorter: (a, b) => a.clicks - b.clicks,
     render: (clicks: number) => (
       <Tag icon={<RiseOutlined />} color="blue">
+        {""}
         {clicks ?? 0}
       </Tag>
     ),

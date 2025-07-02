@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useAuth, UserProvider } from "./context/UserContext";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Spin } from "antd";
+import { ConfigProvider, Spin } from "antd";
 import { AuthGuardProvider } from "./context/AuthGuardContext";
 
 const queryClient = new QueryClient({
@@ -30,18 +30,27 @@ const AppContent = () => {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthGuardProvider>
-        <UserProvider>
-          <Toaster
-            position="top-center" // Vị trí hiển thị toast
-            toastOptions={{
-              // Tùy chỉnh chung cho tất cả toast
-              duration: 5000, // Thời gian hiển thị mặc định
-            }}
-          />
-          <AppContent />
-        </UserProvider>
-      </AuthGuardProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            // ✅ THÊM DÒNG NÀY VÀO
+            fontFamily: '"Inter", sans-serif',
+          },
+        }}
+      >
+        <AuthGuardProvider>
+          <UserProvider>
+            <Toaster
+              position="top-center" // Vị trí hiển thị toast
+              toastOptions={{
+                // Tùy chỉnh chung cho tất cả toast
+                duration: 5000, // Thời gian hiển thị mặc định
+              }}
+            />
+            <AppContent />
+          </UserProvider>
+        </AuthGuardProvider>
+      </ConfigProvider>
     </QueryClientProvider>
   );
 }

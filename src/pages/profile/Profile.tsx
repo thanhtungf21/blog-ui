@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useRef, useState, useCallback } from "react";
-import { useAuth } from "@/context/UserContext";
+
 import { Helmet } from "react-helmet-async";
 import {
   FaVolumeUp,
@@ -59,7 +59,6 @@ const Profile = () => {
   const [isVolumeHovered, setIsVolumeHovered] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
-  const { user } = useAuth();
   const handlePlay = useCallback(() => {
     if (videoRef.current && audioRef.current) {
       videoRef.current?.play();
@@ -71,7 +70,7 @@ const Profile = () => {
       }
       // console.log({ user });
     }
-  }, [user, volume, isMuted]);
+  }, [volume, isMuted]);
 
   const handleVolumeChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,9 +118,9 @@ const Profile = () => {
         />
       </Helmet>
       <div className={clsx("")}>
-        <div
+        <button
           className={clsx(
-            "fixed top-0 left-0 h-screen w-screen z-10 cursor-pointer bg-white/[.952] text-black/35 font-medium flex items-center justify-center transition-all duration-300", // Tailwind classes for hidden_background
+            "fixed top-0 left-0 h-screen w-screen z-10 cursor-pointer bg-white/[.952] !text-black/45 !text-2xl !font-bold flex items-center justify-center transition-all duration-300", // Tailwind classes for hidden_background
             isStart
               ? "opacity-0 pointer-events-none animate-fadeOut"
               : "opacity-100",
@@ -133,7 +132,7 @@ const Profile = () => {
           }}
         >
           Click to enter...
-        </div>
+        </button>
         <video
           ref={videoRef}
           // autoPlay

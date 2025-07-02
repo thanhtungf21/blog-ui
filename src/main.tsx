@@ -16,7 +16,7 @@ import Error from "./pages/error/Error.tsx";
 // Route configurations
 import DefaultRoutes from "./routes/DefaultRoutes.tsx";
 import LandingPageRoutes from "./routes/LandingPageRoutes.tsx";
-import AuthGuard from "./components/AuthGuard/AuthGuard.tsx";
+// import AuthGuard from "./components/AuthGuard/AuthGuard.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        element: <AuthGuard />,
+        // element: <AuthGuard />,
         children: [
           {
             element: <DefaultLayout />,
