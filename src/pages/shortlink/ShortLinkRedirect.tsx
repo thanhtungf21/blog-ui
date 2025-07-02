@@ -22,6 +22,7 @@ const ShortLinkRedirect = () => {
       try {
         const response = await linkService.getOriginalUrl(shortCode);
         // Giả sử API trả về cấu trúc { data: { originalUrl: '...' } }
+
         if (response && response.data && response.data.originalUrl) {
           // Thực hiện chuyển hướng
           window.location.href = response.data.originalUrl;
@@ -40,11 +41,7 @@ const ShortLinkRedirect = () => {
   }, [shortCode, navigate]);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center w-screen h-screen">
-        <Spin tip="Đang chuyển hướng..." size="large" />
-      </div>
-    );
+    return <Spin tip="Đang chuyển hướng..." size="large" fullscreen />;
   }
 
   if (error) {

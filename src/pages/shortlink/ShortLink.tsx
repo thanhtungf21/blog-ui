@@ -10,12 +10,15 @@ import {
   Spin,
   Alert,
   Space,
+  Avatar,
+  Flex,
 } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
-
+import { Link as RouterDomLink } from "react-router-dom";
 import { linkService } from "@/services/linkService";
 import { handleApiError } from "@/utils/errorHandler";
+import logo from "@/assets/imgs/logo/logo.png";
 
 const { Title, Text, Link } = Typography;
 
@@ -63,6 +66,11 @@ const ShortLink = () => {
   return (
     <div className="flex items-center justify-center min-h-[100vh] bg-gray-100">
       <Card className="w-full max-w-2xl shadow-lg">
+        <Flex align="center" justify="center">
+          <RouterDomLink to={"/login"}>
+            <Avatar src={logo} size={68} />
+          </RouterDomLink>
+        </Flex>
         <Title level={2} className="text-center">
           Create Short Link
         </Title>

@@ -1,6 +1,6 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { Card, Input, Button, Typography, Form } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { Card, Input, Button, Typography, Form, Avatar, Flex } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 
@@ -8,6 +8,7 @@ import { authService } from "@/services/authService";
 import { handleApiError } from "@/utils/errorHandler";
 import { IFormInput } from "@/types/auth";
 import { useQueryClient } from "@tanstack/react-query";
+import logo from "@/assets/imgs/logo/logo.png";
 
 const { Title } = Typography;
 
@@ -56,6 +57,11 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center h-[100vh] bg-gray-100">
       <Card className="w-full max-w-md shadow-lg">
+        <Flex align="center" justify="center">
+          <Link to={"/"}>
+            <Avatar src={logo} size={70} />
+          </Link>
+        </Flex>
         <Title level={2} className="text-center">
           Login
         </Title>

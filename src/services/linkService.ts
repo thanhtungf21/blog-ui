@@ -1,4 +1,5 @@
 import api from "./api";
+import apiShortLink from "./api-shortLink";
 
 // Định nghĩa kiểu dữ liệu cho một link (hãy điều chỉnh cho phù hợp với dữ liệu thực tế)
 export interface ILink {
@@ -44,7 +45,7 @@ export const linkService = {
   },
   getOriginalUrl: async (shortCode: string) => {
     try {
-      const response = await api.get(`/slink/${shortCode}`);
+      const response = await apiShortLink.get(`/${shortCode}`);
       return response.data;
     } catch (error) {
       throw error;
