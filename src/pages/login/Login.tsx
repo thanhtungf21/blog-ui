@@ -3,7 +3,7 @@ import { authService } from "@/services/authService";
 import { IFormInput as LoginPayload } from "@/types/auth";
 import { handleApiError } from "@/utils/errorHandler";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Flex, Form, Input, Typography } from "antd";
+import { Avatar, Button, Flex, Form, Input, Spin, Typography } from "antd";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -53,9 +53,7 @@ const Login = () => {
   // Hiển thị loading trong khi đang kiểm tra
   if (isCheckingAuth) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        Đang kiểm tra phiên đăng nhập...
-      </div>
+      <Spin size="large" tip="Đang kiểm tra phiên đăng nhập..." fullscreen />
     );
   }
 
