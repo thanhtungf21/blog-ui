@@ -1,3 +1,4 @@
+// src/context/UserContext.tsx
 import { authService } from "@/services/authService";
 import { User } from "@/types/auth";
 
@@ -6,7 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-// import { useAuthGuard } from "./AuthGuardContext";
+import { useAuthGuard } from "./AuthGuardContext"; // <-- THÊM DÒNG NÀY
 
 // Create the context
 interface IUserContext {
@@ -23,7 +24,7 @@ export const UserProvider = ({ children }: any) => {
   // Bắt đầu với trạng thái loading
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  // const { isAuthRequired } = useAuthGuard();
+  const { isAuthRequired } = useAuthGuard(); // <-- THÊM DÒNG NÀY
 
   const {
     data: userData,
@@ -33,12 +34,12 @@ export const UserProvider = ({ children }: any) => {
   } = useQuery({
     queryKey: ["me"], // Key định danh cho query này
     queryFn: authService.getMe, // Hàm gọi API
-    // enabled: isAuthRequired,
+    enabled: isAuthRequired, // <-- THAY ĐỔI Ở ĐÂY: Chỉ kích hoạt khi route yêu cầu xác thực
     retry: false, // Không tự động thử lại nếu API /me thất bại (thường là do chưa đăng nhập)
     refetchOnWindowFocus: false, // Tùy chọn: tránh gọi lại API mỗi khi focus vào cửa sổ
   });
 
-  // 'user' chính là dữ liệu trả về từ API, nằm trong `userData.user`
+  // 'user' chính là dữ liệu trả về từ API, nằm trong `userData.data`
   const user = userData?.data || null;
 
   const logout = async () => {

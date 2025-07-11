@@ -1,93 +1,67 @@
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  Card,
-  Input,
-  Button,
-  Typography,
-  Form,
-  Avatar,
-  Flex,
-  Spin,
-} from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import toast from "react-hot-toast";
-
+// src/pages/auth/Login.tsx
 import { authService } from "@/services/authService";
+import { IFormInput as LoginPayload } from "@/types/auth";
 import { handleApiError } from "@/utils/errorHandler";
-import { IFormInput } from "@/types/auth";
-import { useQueryClient } from "@tanstack/react-query";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Flex, Form, Input, Typography } from "antd";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react"; // <-- THÊM DÒNG NÀY
 import logo from "@/assets/imgs/logo/logo.png";
-import { useAuth } from "@/context/UserContext";
-import { useEffect } from "react";
 
 const { Title } = Typography;
 
 const Login = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { user, isLoading, isSuccess } = useAuth(); // Lấy trạng thái từ context
 
-  // const { setUser } = useContext(UserContext)!;
+  const { isSuccess: isLoggedIn, isLoading: isCheckingAuth } = useQuery({
+    queryKey: ["checkAuthOnLoginPage"], // Key riêng biệt cho việc kiểm tra này
+    queryFn: authService.getMe, // Gọi thẳng đến API getMe
+    retry: false, // Không thử lại nếu thất bại (VD: token không hợp lệ)
+    refetchOnWindowFocus: false, // Không cần fetch lại khi focus vào cửa sổ
+  });
+  // --- START: Logic kiểm tra và chuyển hướng ---
+  useEffect(() => {
+    // Nếu query ở trên thành công (isLoggedIn = true)
+    // có nghĩa là người dùng đã đăng nhập, ta chuyển hướng họ đi
+    if (isLoggedIn) {
+      // toast.success("Bạn đã đăng nhập. Đang chuyển hướng...");
+      navigate("/dashboard");
+    }
+  }, [isLoggedIn, navigate]);
+  // --- END: Logic kiểm tra và chuyển hướng ---
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<IFormInput>({
-    defaultValues: {
-      email: "",
-      password: "",
+  const mutation = useMutation({
+    mutationFn: (payload: LoginPayload) => authService.login(payload),
+    onSuccess: () => {
+      toast.success("Đăng nhập thành công!");
+      // Invalidate query 'me' để trigger việc fetch lại thông tin user mới
+      queryClient.invalidateQueries({ queryKey: ["me"] });
+      navigate("/");
+    },
+    onError: (error) => {
+      handleApiError(error, "Đăng nhập thất bại");
     },
   });
 
-  // Sử dụng useEffect để kiểm tra và chuyển hướng
-  useEffect(() => {
-    // Nếu query "me" thành công và có dữ liệu user
-    if (isSuccess && user) {
-      toast.success("Bạn đã đăng nhập.");
-      navigate("/dashboard", { replace: true }); // Chuyển hướng đến dashboard
-    }
-  }, [isSuccess, user, navigate]);
-
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    try {
-      // Gọi hàm login từ service
-
-      const responseData = await authService.login(data);
-
-      if (responseData && responseData.data) {
-        queryClient.invalidateQueries({ queryKey: ["me"] });
-        toast.success(responseData?.message || "Đăng nhập thành công!");
-        navigate("/dashboard");
-      } else {
-        // Trường hợp server trả về 200 nhưng không có dữ liệu user mong muốn
-        toast.error(
-          responseData.message || "Phản hồi không hợp lệ từ máy chủ."
-        );
-      }
-    } catch (error) {
-      // ---> SỬA LỖI Ở ĐÂY <---
-      // Chỉ cần gọi hàm xử lý lỗi chung
-      handleApiError(
-        error,
-        "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin."
-      );
-    }
+  const onFinish = (values: LoginPayload) => {
+    mutation.mutate(values);
   };
 
-  if (isLoading) {
-    return <Spin tip="Đang kiểm tra xác thực..." size="large" fullscreen />;
-  }
-
-  // Nếu đã xác thực thành công, không render gì cả vì useEffect sẽ chuyển hướng
-  if (user) {
-    return null;
+  // Hiển thị loading trong khi đang kiểm tra
+  if (isCheckingAuth) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        Đang kiểm tra phiên đăng nhập...
+      </div>
+    );
   }
 
   return (
-    <div className="flex items-center justify-center h-[100vh] bg-gray-100">
-      <Card className="w-full max-w-md shadow-lg">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="p-8 bg-white rounded-lg shadow-md w-96">
         <Flex align="center" justify="center">
           <Link to={"/"}>
             <Avatar src={logo} size={70} />
@@ -96,45 +70,31 @@ const Login = () => {
         <Title level={2} className="text-center">
           Login
         </Title>
-        <Form onFinish={handleSubmit(onSubmit)} layout="vertical">
-          {/* ... Các Form.Item không thay đổi ... */}
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+        >
+          {/* Form fields... (giữ nguyên) */}
           <Form.Item
-            label="Email"
-            validateStatus={errors.email ? "error" : ""}
-            help={errors.email?.message}
-            required
+            name="email"
+            rules={[{ required: true, message: "Please input your Email!" }]}
           >
-            <Controller
-              name="email"
-              control={control}
-              rules={{ required: "Email is required" }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  prefix={<UserOutlined />}
-                  placeholder="Email"
-                />
-              )}
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Email"
+              type="email"
             />
           </Form.Item>
-
           <Form.Item
-            label="Password"
-            validateStatus={errors.password ? "error" : ""}
-            help={errors.password?.message}
-            required
+            name="password"
+            rules={[{ required: true, message: "Please input your Password!" }]}
           >
-            <Controller
-              name="password"
-              control={control}
-              rules={{ required: "Password is required" }}
-              render={({ field }) => (
-                <Input.Password
-                  {...field}
-                  prefix={<LockOutlined />}
-                  placeholder="Password"
-                />
-              )}
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
             />
           </Form.Item>
 
@@ -143,13 +103,14 @@ const Login = () => {
               type="primary"
               htmlType="submit"
               className="w-full"
-              loading={isSubmitting}
+              loading={mutation.isPending}
             >
-              {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
+              Log in
             </Button>
+            Or <Link to="/register">register now!</Link>
           </Form.Item>
         </Form>
-      </Card>
+      </div>
     </div>
   );
 };
