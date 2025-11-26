@@ -1,44 +1,34 @@
-// src/pages/auth/Login.tsx
 import { authService } from "@/services/authService";
 import { IFormInput as LoginPayload } from "@/types/auth";
 import { handleApiError } from "@/utils/errorHandler";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Flex, Form, Input, Spin, Typography } from "antd";
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query"; // Không cần useQueryClient nữa
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react"; // <-- THÊM DÒNG NÀY
+import { useEffect } from "react";
 import logo from "@/assets/imgs/logo/logo.png";
+import { useAuthStore } from "@/store/authStore"; // Import store
 
 const { Title } = Typography;
 
 const Login = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  // Lấy state và actions từ Zustand
+  const { isAuthenticated, isLoading: isAuthLoading, fetchUser } = useAuthStore();
 
-  const { isSuccess: isLoggedIn, isLoading: isCheckingAuth } = useQuery({
-    queryKey: ["checkAuthOnLoginPage"], // Key riêng biệt cho việc kiểm tra này
-    queryFn: authService.getMe, // Gọi thẳng đến API getMe
-    retry: false, // Không thử lại nếu thất bại (VD: token không hợp lệ)
-    refetchOnWindowFocus: false, // Không cần fetch lại khi focus vào cửa sổ
-  });
-  // --- START: Logic kiểm tra và chuyển hướng ---
   useEffect(() => {
-    // Nếu query ở trên thành công (isLoggedIn = true)
-    // có nghĩa là người dùng đã đăng nhập, ta chuyển hướng họ đi
-    if (isLoggedIn) {
-      // toast.success("Bạn đã đăng nhập. Đang chuyển hướng...");
+    if (isAuthenticated) {
       navigate("/dashboard");
     }
-  }, [isLoggedIn, navigate]);
-  // --- END: Logic kiểm tra và chuyển hướng ---
+  }, [isAuthenticated, navigate]);
 
   const mutation = useMutation({
     mutationFn: (payload: LoginPayload) => authService.login(payload),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success("Đăng nhập thành công!");
-      // Invalidate query 'me' để trigger việc fetch lại thông tin user mới
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      // Gọi fetchUser để cập nhật state user vào Zustand store ngay lập tức
+      await fetchUser(); 
       navigate("/");
     },
     onError: (error) => {
@@ -50,8 +40,8 @@ const Login = () => {
     mutation.mutate(values);
   };
 
-  // Hiển thị loading trong khi đang kiểm tra
-  if (isCheckingAuth) {
+  // Hiển thị loading nếu Zustand đang check auth (ví dụ reload trang tại màn login)
+  if (isAuthLoading) {
     return (
       <Spin size="large" tip="Đang kiểm tra phiên đăng nhập..." fullscreen />
     );
@@ -59,6 +49,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        {/* ... Phần giao diện giữ nguyên ... */}
       <div className="p-8 bg-white rounded-lg shadow-md w-96">
         <Flex align="center" justify="center">
           <Link to={"/"}>
@@ -74,7 +65,6 @@ const Login = () => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
         >
-          {/* Form fields... (giữ nguyên) */}
           <Form.Item
             name="email"
             rules={[{ required: true, message: "Please input your Email!" }]}

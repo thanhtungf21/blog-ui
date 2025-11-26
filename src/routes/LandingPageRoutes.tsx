@@ -7,11 +7,11 @@ import ShortLink from "@/pages/shortlink/ShortLink";
 // Sử dụng React.lazy để tải component khi cần thiết
 const Profile = lazy(() => import("@/pages/profile/Profile"));
 const Login = lazy(() => import("@/pages/login/Login"));
+const Register = lazy(() => import("@/pages/register/Register")); // <-- Import trang Register
 
 const LandingPageRoutes: RouteConfig[] = [
   {
-    // path: "/profiles",
-    path: "profiles", // Changed: Relative path
+    path: "profiles", 
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <Profile />
@@ -22,21 +22,20 @@ const LandingPageRoutes: RouteConfig[] = [
     index: true,
     element: <Navigate to="/shortlink" replace />,
   },
-  // {
-  //   // path: "/",
-  //   index: true, // Changed: Use index: true for the root of this layout
-  //   element: (
-  //     <Suspense fallback={<RouteLoadingFallback />}>
-  //       <Profile />
-  //     </Suspense>
-  //   ),
-  // },
   {
-    // path: "/login",
-    path: "login", // Changed: Relative path
+    path: "login",
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <Login />
+      </Suspense>
+    ),
+  },
+  // Thêm Route Register vào đây
+  {
+    path: "register",
+    element: (
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Register />
       </Suspense>
     ),
   },

@@ -13,8 +13,9 @@ import type { TableProps } from "antd";
 import { CopyOutlined, RiseOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 
-import { linkService, ILink } from "../../services/linkService";
+import { linkService } from "../../services/linkService";
 import { handleApiError } from "../../utils/errorHandler";
+import { ILink } from "@/types/link";
 
 const { Title, Text, Link } = Typography;
 

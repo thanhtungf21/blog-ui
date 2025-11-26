@@ -27,7 +27,8 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.4.0",
     "vite": "^6.2.2",
-    "yarn": "^1.22.22"
+    "yarn": "^1.22.22",
+    "zustand": "^5.0.8"
   },
   "scripts": {
     "dev": "vite",

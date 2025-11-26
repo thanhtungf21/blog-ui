@@ -20,7 +20,7 @@ const items = [
     icon: <LinkOutlined />,
   },
   {
-    label: <Link to="/profiles">Profile</Link>,
+    label: <Link to="/profile">Profile</Link>,
     key: "/profiles",
     icon: <UserOutlined />,
   },

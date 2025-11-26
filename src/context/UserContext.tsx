@@ -17,9 +17,13 @@ interface IUserContext {
   isSuccess: boolean;
 }
 
+interface UserProviderProps {
+  children: React.ReactNode;
+}
+
 export const UserContext = createContext<IUserContext | undefined>(undefined);
 // Provider component to manage user state and provide it to the app
-export const UserProvider = ({ children }: any) => {
+export const UserProvider = ({ children }: UserProviderProps) => {
   // Initialize user state with name and login status
   // Bắt đầu với trạng thái loading
   const navigate = useNavigate();

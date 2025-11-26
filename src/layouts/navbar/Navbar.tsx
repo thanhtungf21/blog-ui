@@ -1,9 +1,9 @@
-// src/layouts/navbar/Navbar.tsx
 import { Avatar, Button, Dropdown, Layout, MenuProps, Space } from "antd";
 import { LogoutOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import NavbarMenu from "./components/NavbarMenu";
-import { useAuth } from "@/context/UserContext";
+import { useAuthStore } from "@/store/authStore"; // Import Zustand store
+import toast from "react-hot-toast";
 
 const { Header } = Layout;
 
@@ -12,8 +12,15 @@ interface NavbarProps {
 }
 
 const Navbar = ({ onMenuClick }: NavbarProps) => {
-  const { user, logout } = useAuth(); // Lấy user và hàm logout từ context
+  // Thay đổi ở đây: Lấy state từ store
+  const { user, logout } = useAuthStore(); 
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    toast.success("Đã đăng xuất thành công");
+    navigate("/login");
+  };
 
   const items: MenuProps["items"] = [
     {
@@ -24,7 +31,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
     {
       key: "2",
       label: (
-        <a onClick={logout}>
+        <a onClick={handleLogout}>
           Logout
         </a>
       ),
@@ -33,6 +40,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
     },
   ];
 
+  // ... (Phần return giữ nguyên như cũ)
   return (
     <Header
       style={{
@@ -42,22 +50,18 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         background: "#001529",
       }}
     >
-      {/* Logo */}
       <div className="text-white text-lg font-bold mr-4">
         <Link to="/" className="text-white">
           My Blog
         </Link>
       </div>
 
-      {/* Main Menu */}
       <div className="hidden md:flex flex-grow justify-center">
         <NavbarMenu />
       </div>
 
-      {/* User Area */}
       <div className="ml-auto">
         {user ? (
-          // Nếu đã đăng nhập, hiển thị User Dropdown
           <Dropdown menu={{ items }} placement="bottomRight">
             <Space className="cursor-pointer">
               <Avatar
@@ -75,7 +79,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         )}
       </div>
 
-      {/* Mobile Menu Button */}
       <div className="md:hidden ml-4">
         <Button type="primary" icon={<MenuOutlined />} onClick={onMenuClick} />
       </div>

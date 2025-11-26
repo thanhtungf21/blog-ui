@@ -1,5 +1,5 @@
 import api from "./api";
-import { IFormInput } from "@/types/auth"; // Chúng ta sẽ tạo file type này ở bước tiếp theo
+import { IFormInput, IRegisterInput } from "@/types/auth"; // Chúng ta sẽ tạo file type này ở bước tiếp theo
 
 /**
  * Service quản lý các chức năng xác thực
@@ -41,5 +41,15 @@ export const authService = {
     }
   },
 
+  register: async (data: IRegisterInput) => {
+    try {
+      // Xóa confirmPassword trước khi gửi lên server (nếu server không cần)
+      const { confirmPassword, ...payload } = data; 
+      const response = await api.post("/auth/register", payload);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
   // Bạn có thể thêm các hàm khác như register, checkStatus, etc. ở đây
 };

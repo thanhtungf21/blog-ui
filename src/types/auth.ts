@@ -7,3 +7,10 @@ export interface IFormInput {
 export interface User {
   email: string;
 }
+
+export interface IRegisterInput {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword?: string; // Field này chỉ dùng ở frontend để validate
+}
