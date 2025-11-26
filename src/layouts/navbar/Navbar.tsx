@@ -25,13 +25,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
       key: "2",
       label: (
         <a onClick={logout}>
-          {" "}
-          {/* Gọi hàm logout từ context */}
           Logout
         </a>
       ),
       icon: <LogoutOutlined />,
-      danger: true, // Hiển thị màu đỏ cho mục nguy hiểm
+      danger: true, 
     },
   ];
 

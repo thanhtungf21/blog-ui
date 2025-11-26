@@ -116,6 +116,8 @@ const Profile = () => {
           // as="audio"
           type="audio/mpeg"
         />
+        <title>Tungnt Profile</title>
+       <meta name="description" content="This is Tungnt2 profile, this page is my socials" />
       </Helmet>
       <div className={clsx("")}>
         <button

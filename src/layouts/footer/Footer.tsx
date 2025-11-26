@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import styles from "./footer.module.css";
+// import clsx from "clsx";
+// import styles from './footer.module.css'
 
 const Footer = () => {
   return (
-    <div className={clsx(styles.footer)}>
-      Copyright © 2025 Tran Trung Nguyen. All Rights Reserved.
+    <div className={'container mx-auto py-3 text-center'}>
+      Copyright © {new Date().getFullYear()} TungNT. All Rights Reserved.
     </div>
   );
 };
