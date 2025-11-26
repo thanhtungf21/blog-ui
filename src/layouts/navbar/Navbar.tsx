@@ -1,8 +1,9 @@
+// src/layouts/navbar/Navbar.tsx
 import { Avatar, Button, Dropdown, Layout, MenuProps, Space } from "antd";
 import { LogoutOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import NavbarMenu from "./components/NavbarMenu";
-import { useAuthStore } from "@/store/authStore"; // Import Zustand store
+import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
 
 const { Header } = Layout;
@@ -12,8 +13,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ onMenuClick }: NavbarProps) => {
-  // Thay đổi ở đây: Lấy state từ store
-  const { user, logout } = useAuthStore(); 
+  const { user, logout } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -30,17 +30,12 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
     },
     {
       key: "2",
-      label: (
-        <a onClick={handleLogout}>
-          Logout
-        </a>
-      ),
+      label: <a onClick={handleLogout}>Logout</a>,
       icon: <LogoutOutlined />,
-      danger: true, 
+      danger: true,
     },
   ];
 
-  // ... (Phần return giữ nguyên như cũ)
   return (
     <Header
       style={{
@@ -48,6 +43,14 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         alignItems: "center",
         padding: "0 24px",
         background: "#001529",
+        // --- START STICKY CONFIG ---
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        zIndex: 1000,
+        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+        // --- END STICKY CONFIG ---
       }}
     >
       <div className="text-white text-lg font-bold mr-4">
@@ -72,7 +75,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
             </Space>
           </Dropdown>
         ) : (
-          // Nếu chưa đăng nhập, hiển thị nút Login
           <Button type="primary" onClick={() => navigate("/login")}>
             Login
           </Button>

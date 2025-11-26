@@ -22,7 +22,8 @@ const DefaultLayout = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Navbar onMenuClick={showDrawer} />
-      <Content style={{ padding: "0 48px", marginTop: 16 }}>
+      {/* Thêm marginTop: 64px để bù cho Sticky Header */}
+      <Content style={{ padding: "0 48px", marginTop: 80 }}> 
         <div
           style={{
             background: "#fff",
