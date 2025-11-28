@@ -1,54 +1,56 @@
-# React + TypeScript + Vite
+# Fe2b Blog - URL Shortener & Bio Profile Platform 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Fe2b Blog** là một nền tảng web hiện đại "All-in-One", kết hợp giữa công cụ rút gọn liên kết (URL Shortener) mạnh mẽ và trang hồ sơ cá nhân (Bio Link) độc đáo. Dự án được xây dựng với trọng tâm là hiệu suất, trải nghiệm người dùng (UX) mượt mà và giao diện thẩm mỹ.
 
-Currently, two official plugins are available:
+![Project Banner](public/grok.png) ## ✨ Tính Năng Nổi Bật
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔗 Rút Gọn Liên Kết (Link Shortener)
 
-## Expanding the ESLint configuration
+- **Rút gọn nhanh chóng:** Biến các liên kết dài thành ngắn gọn, dễ nhớ.
+- **Custom Alias:** Tùy chỉnh mã đường dẫn (VD: `domain.com/my-custom-link`).
+- **Dashboard quản lý:** Xem danh sách liên kết, thống kê lượt click (Clicks counter).
+- **Sao chép nhanh:** Copy link vào clipboard chỉ với 1 cú click.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 👤 Hồ Sơ Cá Nhân (Bio Profile)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Giao diện ấn tượng:** Hiệu ứng nền video, nhạc nền tích hợp trình phát (Play/Pause/Mute).
+- **Social Hub:** Tập hợp tất cả liên kết mạng xã hội (Facebook, TikTok, GitHub, YouTube...) tại một nơi.
+- **Hiệu ứng thị giác:** Sử dụng Glassmorphism, hiệu ứng hạt (Particles) và hoạt ảnh mượt mà.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🛠 Hệ Thống & UX
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Authentication:** Đăng ký và Đăng nhập bảo mật (Giao diện Split-Screen hiện đại).
+- **Smooth Scrolling:** Tích hợp **Lenis** cho trải nghiệm cuộn trang mượt mà đẳng cấp cao.
+- **Responsive Design:** Tối ưu hóa hoàn toàn cho Mobile (chuyển đổi Grid sang Carousel).
+- **Interactive UI:** Hiệu ứng Hover, Loading states, và thông báo Toast thân thiện.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## 🛠 Công Nghệ Sử Dụng (Tech Stack)
+
+Dự án được xây dựng trên nền tảng các công nghệ mới nhất:
+
+- **Core:** [React 18](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite](https://vitejs.dev/) (Siêu tốc)
+- **State Management:**
+  - [Zustand](https://github.com/pmndrs/zustand) (Quản lý Global State - Auth, User)
+  - [TanStack Query (React Query)](https://tanstack.com/query/latest) (Quản lý Server State, Caching)
+- **Styling:**
+  - [Tailwind CSS v4](https://tailwindcss.com/)
+  - [Ant Design](https://ant.design/) (UI Components)
+  - [CSS Modules](https://github.com/css-modules/css-modules) (Cho một số component đặc thù)
+- **Routing:** [React Router DOM v6](https://reactrouter.com/)
+- **Form Handling:** [React Hook Form](https://react-hook-form.com/)
+- **Animations & Effects:**
+  - [Lenis](https://github.com/studio-freight/lenis) (Smooth Scroll)
+  - React Bits (Particles, Prism)
+- **API Client:** [Axios](https://axios-http.com/)
+
+## ⚙️ Cài Đặt & Chạy Dự Án
+
+Đảm bảo bạn đã cài đặt **Node.js** (khuyến nghị v18+) và **pnpm**.
+
+### 1. Clone dự án
+
+```bash
+git clone [https://github.com/thanhtungf21/blog-ui.git](https://github.com/thanhtungf21/blog-ui.git)
+cd blog-ui
 ```
