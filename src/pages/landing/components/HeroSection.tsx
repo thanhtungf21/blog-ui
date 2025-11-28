@@ -57,7 +57,7 @@ const HeroSection = () => {
           <Button
             size="large"
             icon={<UserOutlined />}
-            onClick={() => navigate("/profiles")}
+            onClick={() => navigate("/profile")}
             className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg !rounded-full !bg-white/10 hover:!bg-white/20 !text-white !border-white/20 backdrop-blur-sm w-full sm:w-auto"
           >
             Xem Demo Profile

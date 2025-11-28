@@ -27,7 +27,7 @@ const items = [
   },
   {
     label: <Link to="/profile">Profile</Link>,
-    key: "/profiles",
+    key: "/profile",
     icon: <UserOutlined />,
   },
   {

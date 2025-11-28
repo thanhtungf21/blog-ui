@@ -41,7 +41,7 @@ const About = () => {
 
         <div className="flex justify-center gap-4 mt-4">
           <Link
-            href="https://github.com/thanhtungf21"
+            href="https://github.com/"
             target="_blank"
             className="text-2xl text-gray-700 hover:text-black transition-colors"
           >

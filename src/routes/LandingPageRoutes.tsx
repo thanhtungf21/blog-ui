@@ -13,7 +13,7 @@ const ShortlinkIntro = lazy(() => import("@/pages/landing/ShortlinkIntro")); // 
 const LandingPageRoutes: RouteConfig[] = [
   {
     // Trang chủ hiển thị Landing Page giới thiệu
-    index: true, 
+    index: true,
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <ShortlinkIntro />
@@ -21,7 +21,7 @@ const LandingPageRoutes: RouteConfig[] = [
     ),
   },
   {
-    path: "profiles",
+    path: "profile",
     element: (
       <Suspense fallback={<RouteLoadingFallback />}>
         <Profile />
