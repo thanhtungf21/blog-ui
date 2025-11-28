@@ -1,7 +1,7 @@
 // src/routes/LandingPageRoutes.tsx
 import { Suspense, lazy } from "react";
-import { RouteConfig } from "@/interfaces/routeConfig";
-import RouteLoadingFallback from "@/components/router/RouteLoadingFallback";
+import { RouteConfig } from "@/types/routeConfig";
+import RouteLoadingFallback from "@/components/common/RouteLoadingFallback";
 
 // Sử dụng React.lazy để tải component khi cần thiết
 const Profile = lazy(() => import("@/pages/profile/Profile"));

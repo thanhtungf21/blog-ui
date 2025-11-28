@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
-import { RouteConfig } from "@/interfaces/routeConfig";
-import RouteLoadingFallback from "@/components/router/RouteLoadingFallback"; // Import component dùng chung
+import { RouteConfig } from "@/types/routeConfig";
+import RouteLoadingFallback from "@/components/common/RouteLoadingFallback"; // Import component dùng chung
 
 // Sử dụng React.lazy để tải component khi cần thiết
 const About = lazy(() => import("@/pages/about-us/About"));

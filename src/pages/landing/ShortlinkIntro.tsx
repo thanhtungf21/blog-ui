@@ -1,40 +1,45 @@
 // src/pages/landing/ShortlinkIntro.tsx
 import { Helmet } from "react-helmet-async";
+import LandingHeader from "./components/LandingHeader"; // Import Header mới
 import HeroSection from "./components/HeroSection";
 import FeaturesSection from "./components/FeaturesSection";
 import ProfileShowcase from "./components/ProfileShowcase";
 import HowItWorksSection from "./components/HowItWorksSection";
 import CtaSection from "./components/CtaSection";
-import Footer from "@/layouts/footer/Footer"; // Tối ưu sử dụng component có sẵn
+import Footer from "@/layouts/components/footer/Footer";
 
 const ShortlinkIntro = () => {
   return (
-    <div className="font-inter">
+    <div className="font-inter bg-white relative">
       <Helmet>
         <title>Rút gọn liên kết & Tạo Bio Profile - All in One</title>
-        <meta
-          name="description"
-          content="Nền tảng 2 trong 1: Rút gọn liên kết an toàn và Tạo hồ sơ cá nhân (Bio Link) độc đáo."
-        />
       </Helmet>
 
-      {/* 1. Hero Section (Dark + Particles) */}
-      <HeroSection />
+      {/* Header riêng cho Landing Page */}
+      <LandingHeader />
 
-      {/* 2. Features (Dark + Glass) */}
-      <FeaturesSection />
+      {/* Gắn ID cho các section để Lenis scroll tới */}
+      <div id="hero">
+        <HeroSection />
+      </div>
 
-      {/* 3. Profile Showcase (Light - High Contrast) */}
-      <ProfileShowcase />
+      <div id="features">
+        <FeaturesSection />
+      </div>
 
-      {/* 4. How It Works (Light Gray) */}
-      <HowItWorksSection />
+      <div id="profile-showcase">
+        <ProfileShowcase />
+      </div>
 
-      {/* 5. CTA Box (Mixed) */}
-      <CtaSection />
+      <div id="how-it-works">
+        <HowItWorksSection />
+      </div>
 
-      {/* 6. Footer (Existing Component) */}
-        <Footer />
+      <div id="cta">
+        <CtaSection />
+      </div>
+
+      <Footer />
     </div>
   );
 };

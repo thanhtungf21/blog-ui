@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-const LandingPageLayout = () => {
+const MainLayout = () => {
   return (
     <>
       <div className="app-landing-page-body">
@@ -10,4 +10,4 @@ const LandingPageLayout = () => {
   );
 };
 
-export default LandingPageLayout;
+export default MainLayout;

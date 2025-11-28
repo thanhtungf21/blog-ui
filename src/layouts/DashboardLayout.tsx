@@ -2,13 +2,13 @@
 import { useState } from "react";
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
-import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
-import NavbarDrawer from "../navbar/components/NavbarDrawer";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import NavbarDrawer from "./components/NavbarDrawer";
 
 const { Content } = Layout;
 
-const DefaultLayout = () => {
+const DashboardLayout = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const showDrawer = () => {
@@ -41,4 +41,4 @@ const DefaultLayout = () => {
   );
 };
 
-export default DefaultLayout;
+export default DashboardLayout;

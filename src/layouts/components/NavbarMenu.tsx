@@ -30,7 +30,6 @@ const items = [
     icon: <InfoCircleOutlined />,
   },
 ];
-
 const NavbarMenu = () => {
   const location = useLocation();
 
@@ -40,9 +39,15 @@ const NavbarMenu = () => {
       mode="horizontal"
       selectedKeys={[location.pathname]}
       items={items}
-      style={{ flex: 1, minWidth: 0, borderBottom: "none" }}
+      // Style đè để làm menu trong suốt, hòa trộn với Navbar cha
+      style={{
+        background: "transparent",
+        borderBottom: "none",
+        width: "100%",
+        fontSize: "15px",
+      }}
+      className="custom-navbar-menu"
     />
   );
 };
-
 export default NavbarMenu;

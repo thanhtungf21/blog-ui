@@ -7,8 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import "antd/dist/reset.css";
 
 // Layouts
-import DefaultLayout from "./layouts/default-layout/DefaultLayout.tsx";
-import LandingPageLayout from "./layouts/landing-page-layout/LandingPageLayout.tsx";
+import DashboardLayout from "./layouts/DashboardLayout.tsx";
 
 // Pages
 import Error from "./pages/error/Error.tsx";
@@ -16,7 +15,9 @@ import Error from "./pages/error/Error.tsx";
 // Route configurations
 import DefaultRoutes from "./routes/DefaultRoutes.tsx";
 import LandingPageRoutes from "./routes/LandingPageRoutes.tsx";
-import AuthGuard from "./components/AuthGuard/AuthGuard.tsx"; // <-- BỎ GHI CHÚ DÒNG NÀY
+import AuthGuard from "./components/common/AuthGuard.tsx"; // <-- BỎ GHI CHÚ DÒNG NÀY
+import SmoothScrolling from "./components/common/SmoothScrolling.tsx";
+import MainLayout from "./layouts/MainLayout.tsx";
 
 const router = createBrowserRouter([
   {
@@ -28,13 +29,13 @@ const router = createBrowserRouter([
         element: <AuthGuard />, // <-- BỎ GHI CHÚ DÒNG NÀY
         children: [
           {
-            element: <DefaultLayout />,
+            element: <DashboardLayout />,
             children: DefaultRoutes,
           },
         ],
       },
       {
-        element: <LandingPageLayout />,
+        element: <MainLayout />,
         children: LandingPageRoutes,
       },
     ],
@@ -47,6 +48,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
-    <RouterProvider router={router} />
+  <SmoothScrolling> {/* Bọc RouterProvider trong SmoothScrolling */}
+      <RouterProvider router={router} />
+    </SmoothScrolling>
   </HelmetProvider>
 );

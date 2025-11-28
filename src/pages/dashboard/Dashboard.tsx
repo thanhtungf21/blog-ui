@@ -12,7 +12,7 @@ import {
 import type { TableProps } from "antd";
 import { CopyOutlined, RiseOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
-
+import { APP_CONFIG } from "@/config/env";
 import { linkService } from "../../services/linkService";
 import { handleApiError } from "../../utils/errorHandler";
 import { ILink } from "@/types/link";
@@ -34,7 +34,7 @@ const columns: TableProps<ILink>["columns"] = [
     render: (shortCode: string) => {
       // Giả sử link rút gọn có dạng `yourdomain.com/shortCode`
       const fullShortUrl = `${
-        import.meta.env.VITE_BE_URL || window.location.origin
+        APP_CONFIG.BASE_URL || window.location.origin
       }/${shortCode}`;
       return (
         <Space>

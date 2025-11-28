@@ -4,12 +4,41 @@
 @plugin "daisyui";
 
 @layer base {
-    html {
-        font-family: "Inter", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-    }
+  html {
+    font-family: "Inter", sans-serif;
+    scroll-behavior: smooth; /* <--- THÊM DÒNG NÀY */
+  }
+}
+
+.carousel-dark-dots .slick-dots li button {
+  background-color: #000 !important; /* Màu đen */
+  opacity: 0.2 !important;
+}
+
+.carousel-dark-dots .slick-dots li.slick-active button {
+  opacity: 0.8 !important;
+}
+
+/* Đẩy dots xuống dưới một chút để không đè lên nội dung */
+/* .carousel-dark-dots .slick-dots-bottom {
+  bottom: -25px !important;
+} */
+
+/* Đảm bảo carousel không bị cắt bóng đổ (shadow) */
+.ant-carousel .slick-list {
+  overflow: visible !important;
+  padding-bottom: 30px !important; /* Tạo khoảng trống cho shadow và dots */
+}
+/* Fix Antd Input Group Dark Mode */
+.custom-addon-input .ant-input-group-addon {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #9ca3af !important;
+}
+.custom-addon-input input {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
 }
 
 /* src/index.css */
@@ -26,47 +55,47 @@
 }
 
 @layer utilities {
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
     }
 
-    .animate-fadeIn {
-        animation: fadeIn 300ms ease-in-out forwards;
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 300ms ease-in-out forwards;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
     }
 
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-        }
+    to {
+      opacity: 0;
+    }
+  }
 
-        to {
-            opacity: 0;
-        }
+  .animate-fadeOut {
+    animation: fadeOut 300ms ease-in-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    .animate-fadeOut {
-        animation: fadeOut 300ms ease-in-out forwards;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fadeInUp {
-        animation: fadeInUp 500ms ease-in-out forwards;
-    }
+  .animate-fadeInUp {
+    animation: fadeInUp 500ms ease-in-out forwards;
+  }
 }
