@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { APP_CONFIG } from "@/config/env";
 // Ưu tiên lấy từ biến môi trường, fallback về localhost
-const baseURL = APP_CONFIG.BASE_URL ?? "http://localhost:3000";
+const baseURL = APP_CONFIG.API_URL ?? "http://localhost:3000";
 
 const api = axios.create({
   baseURL: baseURL,
