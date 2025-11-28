@@ -73,8 +73,8 @@ const LandingHeader = () => {
               key={item.id}
               onClick={() => handleScrollTo(item.id)}
               className={clsx(
-                "text-sm font-medium transition-colors hover:text-blue-500",
-                isScrolled ? "text-gray-600" : "text-gray-300!"
+                "text-sm font-medium cursor-pointer transition-colors hover:text-blue-500",
+                isScrolled ? "text-gray-600!" : "text-gray-300!"
               )}
             >
               {item.label}
