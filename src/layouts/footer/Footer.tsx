@@ -3,9 +3,11 @@
 
 const Footer = () => {
   return (
-    <div className={'container mx-auto py-3 text-center'}>
+    <footer className="bg-gray-800">
+      <div className={'container mx-auto py-3 text-center text-gray-100'}>
       Copyright © {new Date().getFullYear()} TungNT. All Rights Reserved.
     </div>
+    </footer>
   );
 };
 

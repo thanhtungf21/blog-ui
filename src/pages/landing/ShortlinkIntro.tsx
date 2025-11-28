@@ -34,9 +34,7 @@ const ShortlinkIntro = () => {
       <CtaSection />
 
       {/* 6. Footer (Existing Component) */}
-      <div className="bg-white border-t border-gray-100">
         <Footer />
-      </div>
     </div>
   );
 };

@@ -27,10 +27,10 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-16 md:py-24 px-4 bg-[#0b1d2e] border-t border-white/5">
+    <section className="py-16 md:py-24 px-4 bg-gray-100">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">Quyền Năng Trong Tay Bạn</h2>
+          <h2 className="text-2xl md:text-4xl font-bold text-black mb-3 md:mb-4">Quyền Năng Trong Tay Bạn</h2>
           <p className="text-gray-400 text-base md:text-lg">Bộ công cụ toàn diện quản lý sự hiện diện trực tuyến</p>
         </div>
 
@@ -38,10 +38,10 @@ const FeaturesSection = () => {
           {features.map((item, index) => (
             <div 
               key={index}
-              className="group p-6 md:p-8 rounded-2xl bg-[#112a45]/50 border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-2"
+              className="group p-6 md:p-8 rounded-2xl bg-[#001529] border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-2"
             >
               {/* Container Background: Sử dụng item.color với opacity 20% (/20), khi hover sẽ full màu */}
-              <div className={`w-12 h-12 md:w-14 md:h-14 text-gray-100 ${item.color}/20 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:${item.color} transition-colors duration-300`}>
+              <div className={`w-12 h-12 md:w-14 md:h-14 text-gray-100 ${item.color}/20 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:${item.color}! transition-colors duration-300`}>
                 {item.icon}
               </div>
               <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">{item.title}</h3>

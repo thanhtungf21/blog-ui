@@ -7,7 +7,7 @@ const ProfileShowcase = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 md:py-24 px-4 bg-white text-gray-900 overflow-hidden">
+    <section className="py-16 md:py-24 px-4 bg-[#001529] text-gray-900 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Flex column trên mobile, row trên desktop */}
         <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
@@ -17,11 +17,11 @@ const ProfileShowcase = () => {
             <div className="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-wider text-purple-600 uppercase bg-purple-100 rounded-full">
               Feature Highlight
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight text-gray-900">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white">
               Xây Dựng Thương Hiệu <br className="hidden md:block"/>
               <span className="text-purple-600">Cá Nhân Độc Đáo</span>
             </h2>
-            <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-400 mb-6 md:mb-8 leading-relaxed">
               Tại sao chỉ gửi một liên kết đơn điệu? Hãy gửi cả một trải nghiệm! 
               Tạo trang đích chứa tất cả thông tin quan trọng của bạn chỉ trong vài phút.
             </p>
@@ -38,8 +38,8 @@ const ProfileShowcase = () => {
                     <CheckCircleOutlined className="text-green-600 text-sm" />
                   </div>
                   <div>
-                    <h4 className="text-base md:text-lg font-semibold text-gray-900">{item.title}</h4>
-                    <p className="text-sm md:text-base text-gray-500">{item.desc}</p>
+                    <h4 className="text-base md:text-lg font-semibold text-white">{item.title}</h4>
+                    <p className="text-sm md:text-base text-gray-400">{item.desc}</p>
                   </div>
                 </div>
               ))}

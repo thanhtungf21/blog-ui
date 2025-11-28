@@ -6,8 +6,8 @@ const CtaSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 md:py-20 px-4 bg-white">
-      <div className="max-w-4xl mx-auto bg-[#001529] rounded-2xl md:rounded-3xl p-8 md:p-16 text-center shadow-2xl relative overflow-hidden">
+    <section className="py-16 md:py-20 px-4 bg-[#001529]">
+      <div className="max-w-4xl mx-auto bg-blue-950 rounded-2xl md:rounded-3xl p-8 md:p-16 text-center shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-40 md:w-64 h-40 md:h-64 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-40 md:w-64 h-40 md:h-64 bg-purple-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 

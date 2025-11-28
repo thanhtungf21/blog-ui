@@ -2,7 +2,8 @@
 import { Button } from "antd";
 import { RocketOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import Particles from "@/components/ui/react-bits/Particles";
+// import Particles from "@/components/ui/react-bits/Particles";
+import Prism from "@/components/ui/react-bits/Prism";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -10,15 +11,16 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-[#001529] text-white overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Particles
-          particleColors={["#ffffff", "#40a9ff"]}
-          particleCount={200}
-          particleSpread={10}
-          speed={0.1}
-          particleBaseSize={100}
-          moveParticlesOnHover={true}
-          alphaParticles={false}
-          disableRotation={false}
+        <Prism
+          animationType="rotate"
+          timeScale={0.5}
+          height={3.5}
+          baseWidth={5.5}
+          scale={3.6}
+          hueShift={0}
+          colorFrequency={1}
+          noise={0}
+          glow={1}
         />
       </div>
 
@@ -27,7 +29,7 @@ const HeroSection = () => {
         <div className="inline-block px-3 py-1 md:px-4 md:py-1.5 mb-4 md:mb-6 text-xs md:text-sm font-medium text-blue-200 bg-blue-900/30 border border-blue-500/30 rounded-full animate-fadeInDown">
           🚀 Phiên bản mới: Đã tích hợp Bio Profile
         </div>
-        
+
         {/* Typography responsive: text-4xl trên mobile -> text-7xl trên desktop */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 md:mb-6 tracking-tight leading-tight animate-fadeInDown">
           Kết Nối Mọi Thứ <br />
@@ -37,8 +39,9 @@ const HeroSection = () => {
         </h1>
 
         <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed animate-fadeInUp px-2">
-          Không chỉ là rút gọn liên kết. Chúng tôi giúp bạn tạo ra <strong>Hồ sơ cá nhân (Bio Link)</strong> ấn tượng, 
-          thể hiện cá tính với nhạc nền, video và kết nối tất cả mạng xã hội.
+          Không chỉ là rút gọn liên kết. Chúng tôi giúp bạn tạo ra{" "}
+          <strong>Hồ sơ cá nhân (Bio Link)</strong> ấn tượng, thể hiện cá tính
+          với nhạc nền, video và kết nối tất cả mạng xã hội.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-bounceIn px-4 sm:px-0">
